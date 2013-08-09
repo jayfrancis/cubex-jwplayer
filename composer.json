@@ -1,0 +1,25 @@
+{
+  "name":              "jayfrancis/cubex-jwplayer",
+  "description":       "Cubex JWPlayer",
+  "version":           "1.0.0",
+  "keywords":          ["jwplayer", "cubex", "widget"],
+  "homepage":          "http://whistlingmedia.com",
+  "license":           "BSD-3-Clause",
+  "authors":           [
+    {
+      "name":     "Jay Francis",
+      "email":    "jay@whistlingmedia.com",
+      "homepage": "http://whistlingmedia.com"
+    }
+  ],
+  "require":           {
+    "php":         ">=5.2.0",
+    "cubex/cubex": "*"
+  },
+  "minimum-stability": "dev",
+  "autoload":          {
+    "psr-0": {
+      "JayFrancis\\Cubex\\JWPlayer": "src/"
+    }
+  }
+}
