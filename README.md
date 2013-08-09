@@ -1,4 +1,4 @@
-cubex-widget-jwplayer
+Cubex JWPlayer
 =====================
 
 JWPlayer Widget for the Cubex Framework
