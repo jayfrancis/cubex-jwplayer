@@ -10,6 +10,8 @@ class JWPlayer
   use ListenerTrait;
   use RequireTrait;
 
+  private $_flashPlayerUrl;
+  private $_html5PlayerUrl;
   private $_captionConfigs = array();
   private $_elementId;
   private $_imageUrl;
@@ -22,8 +24,6 @@ class JWPlayer
     $this->_listen(__NAMESPACE__);
 
     $this->_elementId = uniqid('video-');
-
-    $this->requireJs('jwplayer');
   }
 
   public function getHtml()
@@ -43,6 +43,12 @@ class JWPlayer
     );
 
     return implode(PHP_EOL, $output);
+  }
+
+  public function addJs()
+  {
+    $this->requireJs('jwplayer');
+    return $this;
   }
 
   /**
@@ -133,14 +139,48 @@ class JWPlayer
     return $this->_height;
   }
 
+  public function setFlashPlayerUrl($flashPlayerUrl)
+  {
+    $this->_flashPlayerUrl = $flashPlayerUrl;
+
+    return $this;
+  }
+
+  public function getFlashPlayerUrl()
+  {
+    if(isset($this->_flashPlayerUrl))
+    {
+      return $this->_flashPlayerUrl;
+    }
+
+    return $this->getDispatchUrl('jwplayer.flash.swf');
+  }
+
+  public function setHtml5PlayerUrl($html5PlayerUrl)
+  {
+    $this->_html5PlayerUrl = $html5PlayerUrl;
+
+    return $this;
+  }
+
+  public function getHtml5PlayerUrl()
+  {
+    if(isset($this->_html5PlayerUrl))
+    {
+      return $this->_html5PlayerUrl;
+    }
+
+    return $this->getDispatchUrl('jwplayer.html5.js');
+  }
+
   private function _getConfigArray()
   {
     $config = [
       'file'        => $this->getVideoUrl(),
       'height'      => $this->getHeight(),
       'width'       => $this->getWidth(),
-      'flashplayer' => $this->getDispatchUrl('jwplayer.flash.swf'),
-      'html5player' => $this->getDispatchUrl('jwplayer.html5.js'),
+      'flashplayer' => $this->getFlashPlayerUrl(),
+      'html5player' => $this->getHtml5PlayerUrl(),
     ];
 
     // Add image
